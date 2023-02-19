@@ -10,11 +10,11 @@ namespace Chat.Server
             var listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             listenSocket.Bind(new IPEndPoint(IPAddress.Any, 33333));
             listenSocket.Listen();
-            Console.WriteLine("Starting Server...");
+            Console.WriteLine($"Starting Server... in thread {Thread.CurrentThread.ManagedThreadId}");
             while (true)
             {
                 var connectedSocket = await listenSocket.AcceptAsync();
-                Console.WriteLine($"Connection accepted from {connectedSocket.RemoteEndPoint} on {connectedSocket.LocalEndPoint}");
+                Console.WriteLine($"Connection accepted from {connectedSocket.RemoteEndPoint} on {connectedSocket.LocalEndPoint}, {Thread.CurrentThread.ManagedThreadId}");
             }
 
 
