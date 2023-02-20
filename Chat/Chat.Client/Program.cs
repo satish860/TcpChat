@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace Chat.Client
 {
@@ -15,6 +16,8 @@ namespace Chat.Client
             await _clientConnection.ConnectAsync("localhost", 33333);
 
             Console.WriteLine($"Connected to server at {_clientConnection.RemoteEndPoint}");
+            var message = Encoding.UTF8.GetBytes("Hello World!!");
+            await _clientConnection.SendAsync(message, SocketFlags.None);
             Console.ReadKey();
         }
     }
